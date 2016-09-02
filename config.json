@@ -1,0 +1,24 @@
+{
+ 	"garage": {
+		"name" : "Home",
+		"users" : [
+			{ "username" : "my_user", "password" : "my_password" }
+		],
+		"doors" : [
+			{
+				"name" : "Right",
+				"sensor_pin" : 27,
+				"trigger_pin" : 24,
+				"invert_sensor" : true,
+				"toggle_duration" : 10
+			},
+			{
+				"name" : "Left",
+				"sensor_pin" : 17,
+				"trigger_pin" : 23,
+				"invert_sensor" : true,
+				"toggle_duration" : 10
+			}
+		]
+	}
+}

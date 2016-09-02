@@ -1,0 +1,46 @@
+!!! 5
+%html(lang="en")
+  %head
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %link(rel="stylesheet" href="css/bootstrap.min.css")
+    :css
+      .door { cursor: pointer; display: flex; align-items: center; }
+      .door>label { font-weight: normal; margin-left: 8px; font-size: 17pt; }
+      .door .status { display: none; width: 76px; height: 76px; }
+      .door.open .status    { display: inline-block; background: #fff url("/images/open.png") no-repeat; }
+      .door.opening .status { display: inline-block; background: #fff url("/images/opening.png") no-repeat; }
+      .door.closed .status  { display: inline-block; background: #fff url("/images/closed.png") no-repeat; }
+      .door.closing .status { display: inline-block; background: #fff url("/images/closing.png") no-repeat; }
+  %body.container
+    .panel.panel-default.garage
+      .panel-heading
+        .panel-title=garage.name
+      %ul#doors.list-group
+        - garage.doors.each do |door|
+          %li{ class: "list-group-item door xx#{door.status}", data: { name: door.name } }
+            .status
+            %label=door.name
+    %script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
+    %script(src='/js/bootstrap.min.js')
+    :javascript
+      function updateDoor(door) {
+        $('.door[data-name="' + door.name + '"]')
+          .removeClass('open opening closed closing')
+          .addClass(door.status);
+      }
+
+      function updateGarage(garage) {
+        garage.doors.forEach(updateDoor);
+      }
+
+      function poll() {
+        $.get('/garage', updateGarage);
+      }
+
+      window.setInterval(poll, 1000);
+
+      $('body').on('click', '.door', function() {
+        $.post('/toggle', $(this).data(), updateGarage);
+      });
