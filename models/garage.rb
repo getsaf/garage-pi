@@ -1,9 +1,8 @@
 class Garage
-	attr_reader :name, :doors, :users
-	def initialize(name, doors, users = [])
+	attr_reader :name, :doors
+	def initialize(name, doors)
 		@name = name
 		@doors = doors
-		@users = users
 	end
 	
 	def [](door_name)

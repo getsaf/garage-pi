@@ -1,9 +1,10 @@
 {
+	"port": 8081,
+	"users" : [
+		{ "username" : "my_user", "password" : "my_password" }
+	],
  	"garage": {
 		"name" : "Home",
-		"users" : [
-			{ "username" : "my_user", "password" : "my_password" }
-		],
 		"doors" : [
 			{
 				"name" : "Right",

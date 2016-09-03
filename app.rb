@@ -6,9 +6,11 @@ require_relative 'models/user.rb'
 require_relative 'models/app_config.rb'
 
 class Application < Sinatra::Base
+	set :port, AppConfig.port
 	set :bind, '0.0.0.0'
 
 	configure do
+		@@users = AppConfig.users
 		@@garage = AppConfig.garage
 		puts @@garage.name
 		@@garage.doors.each do |door|
@@ -17,8 +19,8 @@ class Application < Sinatra::Base
 	end
 
 	use Rack::Auth::Basic, "Restricted Area" do |username, password|
-		return true if @@garage.users.empty?
-		@@garage.users.select do |user|
+		return true if @@users.empty?
+		@@users.select do |user|
 			username == user.username && password == user.password
 		end
 	end
