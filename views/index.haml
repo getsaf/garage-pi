@@ -1,11 +1,17 @@
 !!! 5
 %html(lang="en")
   %head
+    %title=garage.name
     %meta(charset="utf-8")
     %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    %link(rel="stylesheet" href="css/bootstrap.min.css")
+    %meta(name="mobile-web-app-capable" content="yes")
+    %meta(name="mobile-web-app-status-bar-style" content="black")
+    %link(rel="icon" sizes="96x96" href="/images/garage.png")
+
+    %link(rel="stylesheet" href="/css/bootstrap.min.css")
     :css
+      body.container { padding: 0; }
       .door { cursor: pointer; display: flex; align-items: center; }
       .door>label { font-weight: normal; margin-left: 8px; font-size: 17pt; }
       .door .status { display: none; width: 76px; height: 76px; }
@@ -22,7 +28,7 @@
           %li{ class: "list-group-item door xx#{door.status}", data: { name: door.name } }
             .status
             %label=door.name
-    %script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
+    %script(src="/js/jquery-3.1.0.min.js")
     %script(src='/js/bootstrap.min.js')
     :javascript
       function updateDoor(door) {
