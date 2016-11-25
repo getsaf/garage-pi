@@ -6,6 +6,6 @@ class Garage
 	end
 	
 	def [](door_name)
-		@doors.select {|door| door.name == door_name}.first
+		@doors.select {|door| door.name.casecmp(door_name) === 0}.first
 	end
 end

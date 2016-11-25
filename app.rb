@@ -39,6 +39,16 @@ class Application < Sinatra::Base
 		json garage_hash
 	end
 
+	post '/open' do
+		@@garage[params[:name]].open
+		json garage_hash
+	end
+
+	post '/close' do
+		@@garage[params[:name]].close
+		json garage_hash
+	end
+
 	private
 
 	def garage_hash
